@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MiAppFeisbuAPI</string>
+
+    <string name="facebook_app_id">633175388208550</string>
+    <string name="fb_login_protocol_scheme">fb633175388208550</string>
+    <string name="facebook_client_token">7ade9d5d581cc21a96955bd11d52e81e</string>
+
+
+</resources>
