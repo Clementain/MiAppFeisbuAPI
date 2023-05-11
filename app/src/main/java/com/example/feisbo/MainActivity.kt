@@ -79,9 +79,8 @@ class MainActivity : AppCompatActivity() {
         val accessToken = AccessToken.getCurrentAccessToken()
         val isLoggedIn = accessToken != null && !accessToken.isExpired
 
-        if(isLoggedIn){
-            Toast.makeText(this@MainActivity, "Ya te has logueado", Toast.LENGTH_SHORT)
-                .show()
+        if (isLoggedIn) {
+            Toast.makeText(this@MainActivity, "Ya te has logueado", Toast.LENGTH_SHORT).show()
         }
 
         callbackManager = CallbackManager.Factory.create()
