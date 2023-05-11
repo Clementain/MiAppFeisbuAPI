@@ -112,6 +112,10 @@ class MainActivity : AppCompatActivity() {
                 // "Logged in as <User Name>"
                 textView.visibility = View.VISIBLE
                 postButton.visibility = View.VISIBLE
+
+                // Solicitar permisos adicionales
+                val permissions = listOf("public_profile", "email", "publish_actions")
+                LoginManager.getInstance().logInWithReadPermissions(this@MainActivity, permissions)
             }
 
             override fun onFailure() {
@@ -122,6 +126,7 @@ class MainActivity : AppCompatActivity() {
                 // An error occurred
             }
         })
+
     }
 
     @Deprecated("Deprecated in Java")
