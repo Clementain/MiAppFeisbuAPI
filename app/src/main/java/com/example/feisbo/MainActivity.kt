@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 HttpMethod.POST,
                 { response ->
                     val graphResponse = response.jsonObject
-                    if (graphResponse!!.has("error")) {
+                    if (graphResponse?.has("error") == true) {
                         val errorMessage = graphResponse.getJSONObject("error").getString("message")
                         Toast.makeText(
                             this@MainActivity, "Error al publicar: $errorMessage", Toast.LENGTH_LONG
