@@ -1,99 +1,57 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.feisbo
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
-import com.facebook.GraphRequest
-import com.facebook.HttpMethod
 import com.facebook.LoginStatusCallback
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
+import com.facebook.share.model.ShareLinkContent
+import com.facebook.share.widget.ShareDialog
 
 
-@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     private lateinit var callbackManager: CallbackManager
     private lateinit var loginButton: LoginButton
     private lateinit var botonprueba: Button
+    private lateinit var botonposteo: Button
+    private var shareDialog: ShareDialog? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        loginButton = findViewById<View>(R.id.login_button) as LoginButton
-        botonprueba = findViewById<View>(R.id.btnP) as Button
-        val textView: TextView = findViewById(R.id.publicacion)
-        val postButton: Button = findViewById(R.id.postButton)
+        /*val accessToken = AccessToken.getCurrentAccessToken()
+        val isLoggedIn = accessToken != null && !accessToken.isExpired*/
+        shareDialog = ShareDialog(this)
 
-        textView.visibility = View.GONE
-        postButton.visibility = View.GONE
-
-
-        // Otorgar permisos al loginButton
-        loginButton.setPermissions(listOf("public_profile", "email", "publish_actions").toString())
-
-        // Otorgar permisos al botonprueba
-        botonprueba.setOnClickListener {
-            LoginManager.getInstance().logInWithReadPermissions(
-                this, listOf("public_profile", "email", "publish_actions")
-            )
-        }
-
-        postButton.setOnClickListener {
-            val message = textView.text.toString()
-
-            val parameters = Bundle()
-            parameters.putString("message", message)
-
-            GraphRequest(AccessToken.getCurrentAccessToken(),
-                "/me/feed",
-                parameters,
-                HttpMethod.POST,
-                { response ->
-                    val graphResponse = response.jsonObject
-                    if (graphResponse?.has("error") == true) {
-                        val errorMessage = graphResponse.getJSONObject("error").getString("message")
-                        Toast.makeText(
-                            this@MainActivity, "Error al publicar: $errorMessage", Toast.LENGTH_LONG
-                        ).show()
-                    } else {
-                        Toast.makeText(this@MainActivity, "Publicación exitosa", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                }).executeAsync()
-        }
-
-
-        // Resto del código...
-        val accessToken = AccessToken.getCurrentAccessToken()
-        val isLoggedIn = accessToken != null && !accessToken.isExpired
-
-        if (isLoggedIn) {
-            Toast.makeText(this@MainActivity, "Ya te has logueado", Toast.LENGTH_SHORT).show()
-        }
 
         callbackManager = CallbackManager.Factory.create()
 
         val EMAIL = "email"
+
+        loginButton = findViewById<View>(R.id.login_button) as LoginButton
+        botonprueba = findViewById<View>(R.id.btnP) as Button
+        botonposteo = findViewById<View>(R.id.postButton) as Button
         listOf(EMAIL)
 
         // Callback registration
         loginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult) {
                 // App code
-                textView.visibility = View.VISIBLE
-                postButton.visibility = View.VISIBLE
             }
 
             override fun onCancel() {
@@ -105,17 +63,26 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+
+        botonprueba.setOnClickListener {
+
+
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("public_profile"))
+        }
+        botonposteo.setOnClickListener {
+            val content: ShareLinkContent = ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse("https://developers.facebook.com")).build()
+            if (ShareDialog.canShow(ShareLinkContent::class.java)) {
+                shareDialog!!.show(content)
+            }
+        }
+
+
         LoginManager.getInstance().retrieveLoginStatus(this, object : LoginStatusCallback {
             override fun onCompleted(accessToken: AccessToken) {
                 // User was previously logged in, can log them in directly here.
                 // If this callback is called, a popup notification appears that says
                 // "Logged in as <User Name>"
-                textView.visibility = View.VISIBLE
-                postButton.visibility = View.VISIBLE
-
-                // Solicitar permisos adicionales
-                val permissions = listOf("public_profile", "email", "publish_actions")
-                LoginManager.getInstance().logInWithReadPermissions(this@MainActivity, permissions)
             }
 
             override fun onFailure() {
@@ -127,6 +94,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+
     }
 
     @Deprecated("Deprecated in Java")
@@ -134,4 +102,5 @@ class MainActivity : AppCompatActivity() {
         callbackManager.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
     }
+
 }

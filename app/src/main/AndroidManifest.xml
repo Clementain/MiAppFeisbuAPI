@@ -6,10 +6,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 
-
     <queries>
         <package android:name="com.facebook.katana" />
+        <provider android:authorities="com.facebook.katana.provider.PlatformProvider" />
     </queries>
+
 
     <application
         android:allowBackup="true"
@@ -38,12 +39,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FacebookActivity"
+            android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             tools:ignore="RedundantLabel" />
         <activity
-            android:name=".CustomTabActivity"
+            android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -54,6 +55,12 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider{633175388208550}"
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" />
     </application>
 
 
