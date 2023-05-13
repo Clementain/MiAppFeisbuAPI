@@ -110,28 +110,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        /*    LoginManager.getInstance().retrieveLoginStatus(this, object : LoginStatusCallback {
-                override fun onCompleted(accessToken: AccessToken) {
-                    // User was previously logged in, can log them in directly here.
-                    // If this callback is called, a popup notification appears that says
-                    // "Logged in as <User Name>"
-                    loginButton.visibility=View.VISIBLE
-                    botonposteo.visibility=View.VISIBLE
-                    btnF.visibility=View.VISIBLE
-                    btnV.visibility=View.VISIBLE
-                    lonk.visibility=View.VISIBLE
-                }
-
-                override fun onFailure() {
-                    // No access token could be retrieved for the user
-                }
-
-                override fun onError(exception: Exception) {
-                    // An error occurred
-                }
-            })*/
-
-
     }
 
     @Deprecated("Deprecated in Java")
