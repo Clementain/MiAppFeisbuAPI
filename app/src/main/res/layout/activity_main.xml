@@ -11,44 +11,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="504dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="628dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
-        android:id="@+id/btnP"
+        android:id="@+id/btnF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="105dp"
-        android:layout_marginBottom="69dp"
-        android:text="@string/botoncilloprueba"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/publicacion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="59dp"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:text="@string/texto_de_la_publicaci_n"
-        app:layout_constraintBottom_toTopOf="@+id/postButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="61dp"
+        android:layout_marginTop="262dp"
+        android:text="@string/foto"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="Autofill,LabelFor,VisualLintTextFieldSize" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/postButton"
+        android:id="@+id/btnV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginBottom="40dp"
-        android:text="@string/publicar"
-        app:layout_constraintBottom_toTopOf="@+id/login_button"
-        app:layout_constraintStart_toStartOf="@+id/login_button" />
+        android:layout_marginEnd="39dp"
+        android:text="@string/video"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnF"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

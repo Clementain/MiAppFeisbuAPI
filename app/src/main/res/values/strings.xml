@@ -6,7 +6,10 @@
     <string name="facebook_client_token">7ade9d5d581cc21a96955bd11d52e81e</string>
     <string name="botoncilloprueba">BotoncilloPrueba</string>
     <string name="texto_de_la_publicaci_n">Texto de la publicación</string>
-    <string name="publicar">Publicar</string>
+    <string name="publicar">Publicar Link</string>
+    <string name="foto">Publicar Foto</string>
+    <string name="video">Publicar Video</string>
+    <string name="escribe_un_link_para_compartir">Escribe un link para compartir</string>
 
 
 </resources>
